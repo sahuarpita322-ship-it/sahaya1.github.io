@@ -340,7 +340,8 @@ function initWebSocket() {
     return; // Already connected
   }
 
-  ws = new WebSocket("ws://localhost:3000");
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  ws = new WebSocket(`${protocol}//${window.location.host}`);
 
   ws.onopen = function() {
     console.log("WebSocket connected");
