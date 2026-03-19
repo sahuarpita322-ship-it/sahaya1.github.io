@@ -363,10 +363,11 @@
 
     // Get server hostname dynamically
     function getWebSocketURL() {
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const hostname = window.location.hostname;
-      const port = window.location.port || '3000';
-      return `${protocol}//${hostname}:${port}`;
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'ws://localhost:3000';
+      }
+      // Replace this URL with the actual URL where your server.js is hosted
+      return 'wss://your-backend-app.onrender.com';
     }
 
     function initWebSocket() {

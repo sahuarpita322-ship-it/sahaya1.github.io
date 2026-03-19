@@ -224,7 +224,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 let ambulanceMarker = L.marker([20.2961, 85.8245]).addTo(map);
 
-const ws = new WebSocket("ws://localhost:3000");
+const wsUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 
+  'ws://localhost:3000' : 'wss://your-backend-app.onrender.com';
+const ws = new WebSocket(wsUrl);
 
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);

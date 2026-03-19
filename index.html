@@ -340,8 +340,11 @@ function initWebSocket() {
     return; // Already connected
   }
 
-  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  ws = new WebSocket(`${protocol}//${window.location.host}`);
+  let wsUrl = 'wss://your-backend-app.onrender.com'; // Replace with your hosted backend URL
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    wsUrl = 'ws://localhost:3000';
+  }
+  ws = new WebSocket(wsUrl);
 
   ws.onopen = function() {
     console.log("WebSocket connected");
